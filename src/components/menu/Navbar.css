@@ -1,0 +1,33 @@
+.ColorMenu{
+background-color: rgb(155, 60, 244);
+}
+
+.carrrito{
+    right: -5px;;
+    height:auto;
+    border: none;
+    border-radius:35px;
+    background-color:  rgb(155, 60, 244);
+    color:rgb(10, 10, 11); 
+}
+.carrrito:hover{
+    background-color: blueviolet;
+    
+}
+.carrrito:active{
+    color:blueviolet;
+}
+
+.buscar{
+    background-color: rgb(155, 60, 244);
+    
+    border: none;
+    border-radius:50%; 
+}
+.buscar:hover{
+    background-color: blueviolet;
+    color: red;
+}
+.buscar:active{
+    color:blueviolet;
+}
