@@ -7,20 +7,29 @@ export const useCartContext = () => {
     return useContext(CartContext)
 } 
 
-
 export const CartContextProvider = ({children}) => {
-    // estados y funciones globales
+
     const [cartList, setCartList] = useState([])
 
-    // logica de no repetir el product
     const agregarCart = ( producto ) => {
+        const prodId =cartList.findIndex(product => product.id === producto.id)
+        if(prodId!==-1){
+            cartList[prodId].cantidad += producto.cantidad
+            setCartList([...cartList])
+            return
+        }
         setCartList( [
             ...cartList,
             producto
-        ] )
+        ])
     }
 
-    
+
+    const precioTotal =() => cartList.reduce( (count,producto) => count += producto.cantidad*producto.precio, 0)
+
+    const cantidadTotal =() => cartList.reduce( ( count,producto) => count += producto.cantidad, 0)
+
+    const eliminarProducto = (id) => setCartList(cartList.filter(prod => prod.id !== id))
 
     const vaciarCarrito = () =>{
         setCartList([])
@@ -29,8 +38,11 @@ export const CartContextProvider = ({children}) => {
     return (
         <CartContext.Provider value={{
             cartList, 
+            cantidadTotal,
+            eliminarProducto,
             agregarCart,
-            vaciarCarrito
+            vaciarCarrito,
+            precioTotal
         }}>
             {children}
         </CartContext.Provider>

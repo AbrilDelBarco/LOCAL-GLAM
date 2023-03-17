@@ -9,6 +9,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import CartWidget from '../CardWidget/CartWideget';
 import { Link, NavLink } from 'react-router-dom';
+
+const categorias =[
+    {id : "REMERAS" , path: "/categoria/REMERAS", name:"REMERAS"},
+    {id : "PANTALONES" , path: "/categoria/PANTALONES", name:"PANTALONES "}
+]
 const Navglam =()=> {
     return (
         <Navbar className='ColorMenu' expand="lg">
@@ -16,15 +21,10 @@ const Navglam =()=> {
             <Navbar.Brand href="#">TIENDA GLAM</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
-            <Nav
-                className="me-auto my-2 my-lg-0"
-                style={{ maxHeight: '100px' }}
-                navbarScroll
-            >
-                <Link className='bt' to='/' >Home</Link>
-                <NavLink className='bt' to='/categoria/REMERAS' >remara</NavLink>
-                <NavLink className='bt' to='/categoria/PANTALONES'>pantalon</NavLink>
-            </Nav>
+            <Nav className='me-auto my0 my-lg-3' style={{ maxHeight: '100%' }}navbarScroll>
+                    <Link className='btn' to='/'>Home</Link>
+                    {categorias.map(cat => <NavLink key={cat.id} className='btn' to={cat.path}>{cat.name}</NavLink >)}
+                </Nav>
             <Form className="d-flex">
                 <Form.Control
                 type="search"
