@@ -28,8 +28,8 @@ if (datForm.gmail !== datForm.validarGmail){
     orden.products =cartList.map(({ name, precio, id}) => ({name, precio, id}))
 
     
-const db = getFirestore
-const queryCollec = collection (db,"Orden")
+const db = getFirestore();
+const queryCollec = collection (db,"Orden");
 
 
  addDoc(queryCollec, orden)
