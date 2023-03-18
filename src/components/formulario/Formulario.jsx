@@ -29,7 +29,7 @@ if (datForm.gmail !== datForm.validarGmail){
 
     
 const db = getFirestore
-const queryCollec = collection (db," Orden")
+const queryCollec = collection (db,"Orden")
 
 
  addDoc(queryCollec, orden)
