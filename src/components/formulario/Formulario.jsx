@@ -1,6 +1,4 @@
 
-
-
 import { addDoc, collection, getFirestore } from 'firebase/firestore'
 import { useState } from 'react'
 
@@ -10,7 +8,7 @@ import { useCartContext } from '../../context/CartContext'
 
 
 
-const From = ({from}) => {
+const From = () => {
 const{cartList,precioTotal,vaciarCarrito } =useCartContext()
 const[id, setId] = useState("")
 const [datForm,setDatFrom] = useState({
@@ -29,7 +27,7 @@ if (datForm.gmail !== datForm.validarGmail){
     orden.comprador =datForm
     orden.precioTotal = precioTotal()
     orden.isActive  = true
-    orden.Productos =cartList.map(({ name, precio, id}) => ({name, precio, id}))
+    orden.Productos =cartList.map(({ nombre, precio, id}) => ({nombre, precio, id}))
 
     
 const db = getFirestore()
@@ -37,18 +35,12 @@ const queryCollec = collection(db,"Orden");
 
 
  addDoc(queryCollec, orden)
-    .then(resp => setId(resp.id))
-    .catch(err => console.log(err))
-    .finally(()=>{
-
+    .then(resp => {
+        setId(resp.id)
         vaciarCarrito()
-        setDatFrom({
-            name:'',
-            gmail:'',
-            phone:'',
-            validarGmail:'' 
-        })
     })
+    .catch(err => console.log(err))
+   
 }
 }
 
@@ -66,6 +58,7 @@ setDatFrom({
 })
 
 }
+
 return (
     <div>
     <p>{precioTotal() !== 0 && `Precio Total: ${precioTotal()}`}</p>  
