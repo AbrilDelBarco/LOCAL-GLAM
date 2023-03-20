@@ -1,14 +1,18 @@
 
+
+
 import { addDoc, collection, getFirestore } from 'firebase/firestore'
 import { useState } from 'react'
+
 import { Link } from 'react-router-dom'
 import { useCartContext } from '../../context/CartContext'
 
 
 
-const From = ({From}) => {
+
+const From = ({from}) => {
 const{cartList,precioTotal,vaciarCarrito } =useCartContext()
-const[id, setId] =useState("")
+const[id, setId] = useState("")
 const [datForm,setDatFrom] = useState({
     name:'',
     gmail:'',
@@ -19,17 +23,17 @@ const [datForm,setDatFrom] = useState({
 const generarOrden =(event) => {
 event.preventDefault()
 if (datForm.gmail !== datForm.validarGmail){
-    ("Gmail incorrecot vuelva a escribirlo")
+    throw new Error("Gmail incorrecto. Por favor, escríbalo nuevamente.")
 }else{
     const orden ={}
     orden.comprador =datForm
     orden.precioTotal = precioTotal()
     orden.isActive  = true
-    orden.products =cartList.map(({ name, precio, id}) => ({name, precio, id}))
+    orden.Productos =cartList.map(({ name, precio, id}) => ({name, precio, id}))
 
     
-const db = getFirestore();
-const queryCollec = collection (db,"Orden");
+const db = getFirestore()
+const queryCollec = collection(db,"Orden");
 
 
  addDoc(queryCollec, orden)
@@ -48,7 +52,7 @@ const queryCollec = collection (db,"Orden");
 }
 }
 
-if (cartList.length ===0) {
+if (cartList.length === 0) {
 return <div >
             <h2>No hay productos en el carro</h2>
             <h3>Su numero de orden es: {id}</h3>
@@ -101,7 +105,7 @@ return (
                     <input className='form-control'
                     type="text" 
                     name='validarGmail' 
-                    placeholder='Validar gmail'
+                    placeholder='validarGmail'
                     onChange={handleOnChange} 
                     required
                     
